@@ -58,7 +58,7 @@ var JSBF = {
 			var i = 0;
 
 			while ( typeof(this.memory[i]) === 'number' ) {
-				print("Zelle " + i + " has value: " + this.memory[i]);
+				print("DEBUG: Zelle " + i + " has value: " + this.memory[i]);
 				i++;
 			}
 
