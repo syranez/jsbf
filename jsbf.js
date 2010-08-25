@@ -127,7 +127,7 @@ var JSBF = {
 
 	parse_dot: function () {
 		debug("DEBUG: Dot");
-		print(this.band.get());
+		print(String.fromCharCode(this.band.get()));
 		this.prg_inc();
 	},
 
@@ -181,6 +181,6 @@ var debug = function (message) {
 	return true;
 }
 
-JSBF.parse('+++.>++.>+.');
-JSBF.parse('++++++++[>++++++++<-]>.');
+// JSBF.parse('+++.>++.>+.');
+JSBF.parse('++++++++[>++++++++<-]>+.');
 
