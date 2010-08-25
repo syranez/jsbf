@@ -67,7 +67,12 @@ var JSBF = {
 	/* Programmzeiger */
 	prg_cnt: 0,
 
+	/* Programm */
+	program: {},
+
 	parse: function (program) {
+		this.program = program;
+
 		while ( this.prg_cnt != program.length ) {
 			switch ( program[this.prg_cnt] ) {
 				case '+': this.parse_inc(); this.prg_cnt++; break;
@@ -75,6 +80,8 @@ var JSBF = {
 				case '>': this.parse_next(); this.prg_cnt++; break;
 				case '<': this.parse_pre(); this.prg_cnt++; break;
 				case '.': this.parse_dot(); this.prg_cnt++; break;
+				case '[': this.parse_open_parenthese(); break;
+				case ']': this.parse_close_parenthese(); break;
 				default: print("I can not interpret: " + program[this.prg_cnt]); this.prg_cnt++; break;
 			}
 		}
@@ -83,25 +90,74 @@ var JSBF = {
 	},
 
 	parse_inc: function () {
+		print("DEBUG: Inc");
 		this.band.inc();
 	},
 
 	parse_dec: function () {
+		print("DEBUG: Dec");
 		this.band.dec();
 	},
 
 	parse_next: function () {
+		print("DEBUG: Next");
 		this.band.next();
 	},
 
 	parse_pre: function () {
+		print("DEBUG: Pre");
 		this.band.pre();
 	},
 
 	parse_dot: function () {
+		print("DEBUG: Dot");
 		print(this.band.get());
-	}
+	},
+
+	parse_open_parenthese: function () {
+		print("DEBUG: Open");
+		if ( this.band.get() !== 0 ) {
+			this.prg_cnt++;
+			return true;
+		}
+
+		// Die Schleife nicht (mehr) ausführen. Suche die schließende Klammer.
+		// Da mehrere Schleifen geschachtelt sein können, muss die Anzahl der
+		// öffnenden Klammern minus die Anzahl der schließenden Klammern 0 ergeben.
+		// Erst dann ist die aktuelle Schleife auch wirklich vorbei.
+		var open_parentheses = 0;
+
+		do {
+			switch ( this.program[this.prg_cnt] ) {
+				case '[': open_parentheses++; break;
+				case ']': open_parentheses--; break;
+			}
+
+			this.prg_cnt++;
+
+		} while ( open_parentheses !== 0 );
+	},
+
+	parse_close_parenthese: function () {
+		print("DEBUG: Close");
+		if ( this.band.get() === 0 ) {
+			this.prg_cnt++;
+		} else {
+			var close_parentheses = 0;
+
+			do {
+				switch ( this.program[this.prg_cnt] ) {
+					case '[': close_parentheses--; break;
+					case ']': close_parentheses++; break;
+				}
+
+				this.prg_cnt--;
+			} while ( close_parentheses !== 0 );
+			this.prg_cnt++;
+		}
+	},
 };
 
-JSBF.parse('+++.>++.>+.');
+//JSBF.parse('+++.>++.>+.');
+JSBF.parse('++++++++[>++++++++<-]>.');
 
