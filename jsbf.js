@@ -1,7 +1,5 @@
 var JSBF = {
 
-	program: "+++.>++.>+.",
-
 	/* Der Speicher */
 	band: {
 
@@ -69,15 +67,15 @@ var JSBF = {
 	/* Programmzeiger */
 	prg_cnt: 0,
 
-	parse: function () {
-		while ( this.prg_cnt != this.program.length ) {
-			switch ( this.program[this.prg_cnt] ) {
+	parse: function (program) {
+		while ( this.prg_cnt != program.length ) {
+			switch ( program[this.prg_cnt] ) {
 				case '+': this.parse_inc(); this.prg_cnt++; break;
 				case '-': this.parse_dec(); this.prg_cnt++; break;
 				case '>': this.parse_next(); this.prg_cnt++; break;
 				case '<': this.parse_pre(); this.prg_cnt++; break;
 				case '.': this.parse_dot(); this.prg_cnt++; break;
-				default: print("I can not interpret: " + this.program[this.prg_cnt]); this.prg_cnt++; break;
+				default: print("I can not interpret: " + program[this.prg_cnt]); this.prg_cnt++; break;
 			}
 		}
 
@@ -105,4 +103,5 @@ var JSBF = {
 	}
 };
 
-JSBF.parse();
+JSBF.parse('+++.>++.>+.');
+
