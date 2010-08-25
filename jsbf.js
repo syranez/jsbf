@@ -90,32 +90,32 @@ var JSBF = {
 	},
 
 	parse_inc: function () {
-		print("DEBUG: Inc");
+		debug("DEBUG: Inc");
 		this.band.inc();
 	},
 
 	parse_dec: function () {
-		print("DEBUG: Dec");
+		debug("DEBUG: Dec");
 		this.band.dec();
 	},
 
 	parse_next: function () {
-		print("DEBUG: Next");
+		debug("DEBUG: Next");
 		this.band.next();
 	},
 
 	parse_pre: function () {
-		print("DEBUG: Pre");
+		debug("DEBUG: Pre");
 		this.band.pre();
 	},
 
 	parse_dot: function () {
-		print("DEBUG: Dot");
+		debug("DEBUG: Dot");
 		print(this.band.get());
 	},
 
 	parse_open_parenthese: function () {
-		print("DEBUG: Open");
+		debug("DEBUG: Open");
 		if ( this.band.get() !== 0 ) {
 			this.prg_cnt++;
 			return true;
@@ -139,7 +139,7 @@ var JSBF = {
 	},
 
 	parse_close_parenthese: function () {
-		print("DEBUG: Close");
+		debug("DEBUG: Close");
 		if ( this.band.get() === 0 ) {
 			this.prg_cnt++;
 		} else {
@@ -157,6 +157,12 @@ var JSBF = {
 		}
 	},
 };
+
+var debug = function (message) {
+	// print(message);
+	
+	return true;
+}
 
 //JSBF.parse('+++.>++.>+.');
 JSBF.parse('++++++++[>++++++++<-]>.');
