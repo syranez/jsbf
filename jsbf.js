@@ -1,5 +1,7 @@
 var JSBF = {
 
+	output: '',
+
 	/* Der Speicher */
 	band: {
 
@@ -98,6 +100,8 @@ var JSBF = {
 			}
 		}
 
+		print(this.output);
+
 		this.band.debug();
 	},
 
@@ -127,7 +131,7 @@ var JSBF = {
 
 	parse_dot: function () {
 		debug("DEBUG: Dot");
-		print(String.fromCharCode(this.band.get()));
+		this.output += String.fromCharCode(this.band.get());
 		this.prg_inc();
 	},
 
