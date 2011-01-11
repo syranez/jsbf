@@ -2,6 +2,7 @@
 
 SRCFILES="
   jsbf.js
+  program.js
   band.js
 "
 
