@@ -3,6 +3,7 @@
 SRCFILES="
   jsbf.js
   program.js
+  output.js
   band.js
 "
 
