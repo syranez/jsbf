@@ -5,5 +5,7 @@ var jsbf = {
   program: {},
   // output string
   output: {},
+  // parser
+  parser: {},
 };
 

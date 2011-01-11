@@ -5,6 +5,7 @@ SRCFILES="
   program.js
   output.js
   band.js
+  parser.js
 "
 
 DISTDIR="../dist"
