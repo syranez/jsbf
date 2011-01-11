@@ -66,7 +66,7 @@
     this.prg_inc();
   };
 
-  this.open_parenthese: function () {
+  this.open_parenthese = function () {
     debug("DEBUG: Open");
     if ( JSBF.band.get() !== 0 ) {
       this.prg_inc();
@@ -90,7 +90,7 @@
     } while ( open_parentheses !== 0 );
   };
 
-  this.close_parenthese: function () {
+  this.close_parenthese = function () {
     debug("DEBUG: Close");
     if ( JSBF.band.get() === 0 ) {
       this.prg_inc();
