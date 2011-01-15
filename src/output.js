@@ -1,12 +1,25 @@
-(function() {
+// This will create an object named output.
+
+// @param j the jsbf module
+// @param m the output module
+// @return the augmented output module
+jsbf.output = (function(j, m) {
+
   var output = '';
 
-  this.add = function ( output ) {
-      this.output = output;
+  m.reset = function () {
+    output ='';
   }
 
-  this.get = function () {
-     return this.output;
+  m.add = function ( sign ) {
+    output += sign;
   }
-}).apply(jsbf.output);
+
+  m.get = function () {
+    return output;
+  }
+
+  return m;
+
+})(jsbf, jsbf.output || {});
 

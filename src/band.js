@@ -1,67 +1,76 @@
-(function() {
+// This will create an object named band.
+
+// @param j the jsbf module
+// @param m the band module
+// @return the augmented band module
+jsbf.band = (function(j, m) {
+
   var memory = {};
 
   /* Zeiger auf die aktuelle Speicherzelle */
   var pointer = 0;
 
-  this.inc = function () {
-    if ( typeof(this.memory[this.pointer]) === 'undefined' ) {
-      this.memory[this.pointer] = 1;
+  m.reset = function () {
+      memory = {};
+      pointer = 0;
+  }
+
+  m.inc = function () {
+    if ( typeof(memory[pointer]) === 'undefined' ) {
+      memory[pointer] = 1;
     } else {
-      this.memory[this.pointer]++;
+      memory[pointer]++;
     }
     
     return true;
   };
 
-  this.dec = function () {
-    if ( typeof(this.memory[this.pointer]) === 'undefined' ) {
-      this.memory[this.pointer] = 0;
+  m.dec = function () {
+    if ( typeof(memory[pointer]) === 'undefined' ) {
+      memory[pointer] = 0;
     } else {
-      if ( this.memory[this.pointer] !== 0 ) {
-        this.memory[this.pointer]--;
+      if ( memory[pointer] !== 0 ) {
+        memory[pointer]--;
       }
     }
 
     return true;
   };
 
-  this.next = function () {
-    this.pointer++;
+  m.next = function () {
+    pointer++;
 
     return true;
   };
 
-  this.pre = function () {
-    if ( this.pointer !== 0 ) {
-      this.pointer--;
+  m.pre = function () {
+    if ( pointer !== 0 ) {
+      pointer--;
     }
 
     return true;
   };
 
-  this.get = function () {
-    if ( typeof(this.memory[this.pointer]) === 'undefined' ) {
-      this.memory[this.pointer] = 0;
+  m.get = function () {
+    if ( typeof(memory[pointer]) === 'undefined' ) {
+      memory[pointer] = 0;
     }
 
-    return this.memory[this.pointer];
+    return memory[pointer];
   };
 
-  this.debug = function () {
+  m.debug = function () {
     var i = 0;
 
-    while ( typeof(this.memory[i]) === 'number' ) {
-      print("DEBUG: Zelle " + i + " has value: " + this.memory[i]);
+    while ( typeof(memory[i]) === 'number' ) {
+      j.debug.debug('Zelle ' + i + ' has value: ' + memory[i]);
       i++;
     }
 
     return true;
   };
-}).apply(jsbf.band);
 
-if ( ! jsbf.band.next() ) {
-  print('Error');
-} else {
-  print('Succes');
-}
+  return m;
+
+})(jsbf, jsbf.band || {});
+

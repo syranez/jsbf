@@ -1,13 +1,21 @@
+// This will create an object named program.
 
-(function() {
-  var code = '';
+// @param j the jsbf module
+// @param m the program module
+// @return the augmented program module
+jsbf.program = (function(j, m) {
 
-  this.set = function ( code ) {
-      this.code = code;
+  var program = '';
+
+  m.set = function ( code ) {
+      program = code;
   }
 
-  this.get = function () {
-     return this.code;
+  m.get = function () {
+     return program;
   }
-}).apply(jsbf.program);
+
+  return m;
+
+})(jsbf, jsbf.program || {});
 

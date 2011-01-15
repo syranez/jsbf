@@ -1,3 +1,3 @@
 function cleanup {
-    rm -rvi $1
+    rm -rv $1
 }
